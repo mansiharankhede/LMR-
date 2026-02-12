@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,39 +9,54 @@
 
 body{
     margin:0;
-    background: linear-gradient(to right,#274377,#243b55);
+    background:linear-gradient(to right,#0f2027,#203a43,#2c5364);
     color:white;
 }
 
+.topbar{
+    background:rgba(0,0,0,0.4);
+    padding:15px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:20px;
+}
 
-header{
-    padding:15px;
-    background:rgba(135, 47, 47, 0.4);
-    text-align:center;
-    font-size:24px;
-    font-weight:bold;
+.topbar span{
+    font-size:14px;
+    opacity:0.8;
 }
 
 
 .main{
     display:grid;
-    grid-template-columns:260px 1fr;
+    grid-template-columns:240px 1fr;
 }
 
 
 .sidebar{
-    background:rgba(217, 111, 111, 0.5);
+    background:rgba(0,0,0,0.5);
     min-height:100vh;
     padding:20px;
 }
 
-.sidebar h3{text-align:center;}
+.sidebar h3{
+    text-align:center;
+    margin-bottom:30px;
+}
 
 .menu div{
-    padding:12px;
+    padding:12px 15px;
     margin:10px 0;
-    background:rgba(228, 9, 9, 0.1);
     border-radius:10px;
+    cursor:pointer;
+    transition:0.3s;
+    background:rgba(255,255,255,0.05);
+}
+
+.menu div:hover{
+    background:#00c6ff;
+    color:black;
 }
 
 
@@ -57,26 +71,29 @@ header{
 
 .card{
     background:white;
-    color:rgb(246, 7, 7);
-    padding:15px;
-    border-radius:15px;
-    box-shadow:0 10px 20px rgba(0,0,0,0.4);
+    color:black;
+    padding:18px;
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.5);
+    transition:0.3s;
 }
 
-.card h3{color:#1b395c;}
+.card:hover{transform:translateY(-5px);}
+
+.card h3{color:#0f2027;}
 
 
 .search-box{
-    margin:25px 0;
+    margin:30px 0;
     display:flex;
-    gap:10px;
+    gap:15px;
 }
 
 .search-box input, .search-box select{
-    padding:10px;
-    border-radius:8px;
+    padding:12px;
+    border-radius:10px;
     border:none;
-    width:200px;
+    width:220px;
 }
 
 
@@ -88,11 +105,14 @@ header{
 
 .course{
     background:white;
-    color:rgb(131, 126, 126);
-    border-radius:15px;
+    color:black;
+    border-radius:18px;
     padding:15px;
-    box-shadow:0 10px 20px rgba(0,0,0,0.4);
+    box-shadow:0 10px 25px rgba(0,0,0,0.5);
+    transition:0.3s;
 }
+
+.course:hover{transform:scale(1.03);}
 
 .course small{color:gray;}
 
@@ -105,30 +125,29 @@ header{
 
 .progress{
     height:100%;
-    background:#4caf50;
+    background:#00c853;
     border-radius:10px;
     width:0%;
     transition:0.5s;
 }
 
 .course button{
-    padding:8px;
+    padding:8px 12px;
     border:none;
     border-radius:8px;
-    background:#6f6a6a;
+    background:#2c5364;
     color:white;
     cursor:pointer;
-    margin-right:5px;
 }
 
 
 .analytics{
-    margin-top:30px;
+    margin-top:35px;
     background:white;
-    color:rgb(120, 106, 106);
+    color:black;
     padding:20px;
-    border-radius:15px;
-    box-shadow:0 10px 20px rgba(0,0,0,0.4);
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.5);
     text-align:center;
 }
 </style>
@@ -136,7 +155,10 @@ header{
 
 <body>
 
-<header>🎓 Smart LMS Dashboard</header>
+<div class="topbar">
+   <div>🎓 Smart Learning Management System</div>
+   <span>Welcome Student</span>
+</div>
 
 <div class="main">
 
@@ -154,14 +176,12 @@ header{
 
 <div class="content">
 
-
 <div class="cards">
     <div class="card"><h3>Total Courses</h3><h2 id="total">9</h2></div>
     <div class="card"><h3>Enrolled</h3><h2 id="enrolled">0</h2></div>
     <div class="card"><h3>Completed</h3><h2 id="completed">0</h2></div>
     <div class="card"><h3>Progress</h3><h2 id="percent">0%</h2></div>
 </div>
-
 
 <div class="search-box">
     <input type="text" id="search" placeholder="Search course">
@@ -173,9 +193,7 @@ header{
     </select>
 </div>
 
-
 <div class="courses" id="courseList">
-
 
 <div class="course" data-cat="web">
     <h3>HTML Basics</h3>
@@ -209,6 +227,14 @@ header{
     <button onclick="complete(this)">Complete</button>
 </div>
 
+<div class="course" data-cat="programming">
+    <h3>Advance Java</h3>
+    <small>Instructor: John</small>
+    <div class="progress-bar"><div class="progress"></div></div>
+    <button onclick="enroll(this)">Enroll</button>
+    <button onclick="complete(this)">Complete</button>
+</div>
+
 <div class="course" data-cat="iot">
     <h3>IoT with ESP32</h3>
     <small>Instructor: Rahul</small>
@@ -225,24 +251,16 @@ header{
     <button onclick="complete(this)">Complete</button>
 </div>
 
-<div class="course" data-cat="Programming">
-    <h3> Advance Java</h3>
-    <small>Instructor: John</small>
-    <div class="progress-bar"><div class="progress"></div></div>
-    <button onclick="enroll(this)">Enroll</button>
-    <button onclick="complete(this)">Complete</button>
-</div>
-
 <div class="course" data-cat="iot">
-    <h3> PCB Design </h3>
+    <h3>PCB Design</h3>
     <small>Instructor: Aloke</small>
     <div class="progress-bar"><div class="progress"></div></div>
     <button onclick="enroll(this)">Enroll</button>
     <button onclick="complete(this)">Complete</button>
 </div>
 
-<div class="course" data-cat="Programming">
-    <h3> Node.js </h3>
+<div class="course" data-cat="programming">
+    <h3>Node.js</h3>
     <small>Instructor: Kshitij</small>
     <div class="progress-bar"><div class="progress"></div></div>
     <button onclick="enroll(this)">Enroll</button>
@@ -250,7 +268,6 @@ header{
 </div>
 
 </div>
-
 
 <div class="analytics">
     <h2>📊 Learning Analytics</h2>
@@ -286,14 +303,12 @@ function update(){
     document.getElementById("status").innerText="Overall Progress: "+percent+"%";
 }
 
-
 document.getElementById("search").addEventListener("keyup",function(){
     let val=this.value.toLowerCase();
     document.querySelectorAll(".course").forEach(c=>{
         c.style.display = c.innerText.toLowerCase().includes(val)?"block":"none";
     });
 });
-
 
 document.getElementById("filter").addEventListener("change",function(){
     let cat=this.value;
